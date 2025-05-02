@@ -1,0 +1,13 @@
+@Name sobel_allsorn_15bB
+@datatype ["lin","[0,300,50]","Zero","infty","negative"]
+@pipeline 0
+
+
+################## Function Definition: ###################
+
+S1 = ( ( (A13 - A11) + (A33 - A31) ) + (2*A23 - 2*A21) )
+S2 = ( ( (A31 - A11) + (A33 - A13) ) + (2*A32 - 2*A12) )
+
+S = sqrt( ( (S1**2) + (S2**2) ) )
+
+

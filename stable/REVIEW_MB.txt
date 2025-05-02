@@ -1,0 +1,36 @@
+BUGs:
+
+- Module werden nicht gefunden, da sie in Subdirectories liegen. --> "import FOLDER.module as ..." Einfügen des Pfades FOLDER löst das Problem.
+
+- MIMO_Solver_N2 und _N4: - Fehlermedlung:
+	# ===== Merge Nodes =============== #
+	Merge/remove NUMERICS:
+	Traceback (most recent call last):
+		File ".\sorngen.py", line 57, in <module>
+		env = elaborator.merge(env, 'numeric', True, 'univariate', True)
+		File "D:\...\designflow\design_elaborator.py", line 179, in merge SST.remove(sibling)
+		File "D:\...\datatypes\type_SST.py", line 196, in remove self.dictNameNode.pop(node.name)
+	KeyError: '2'
+	--> Solved by MB
+
+- Wenn man nicht den manuellen Datentyp ("man") nimmt, sondern den generischen (z.B. "lin"), dann tritt ein Fehler auf, wenn man die Schrittweite als Bruch definiert
+	z.b. @datatype ["lin","[0,1,1/5]","Zero","infty","negative"], nimmt man "0.2" statt "1/5" funktioniert es
+	--> Vermutlich ist irgendwo das Fraction Modul nicht eingebunden, in der alten Version funktioniert das Ganze ja mit 1/5
+	
+- (25.11.20): Bei "single fused" gibt es einen Error, wenn die Equation für z nach der von z0 kommt (dadurch hat das Toplevel auch z0 als output)
+	--> Solved by MB
+
+- (25.11.20): Bei "not fused" wird kein Pipeline Register eingefügt, trotz "@pipeline 1" (input file: 4op_cmplx_example.sorn)
+
+- (25.11.20): Bei "single" und "double fused" wird (0.5*x3+x4) nicht gefused, sondern besteht aus einzelnen MUL und ADD
+	--> Solved by MB
+	
+- TODO: (MB 02.02.21) Einfügen von "text-basierten" Funktionen mit 2 Eingängen wie hypot(x,y). Im Moment nur für 1 Eingang wie sqrt(x)
+
+- (21.05.21): Solved Error occuring for addsqr merged: Redesigned the calculation of the isOpen conditions in "genFctnSORN" in "design_SORNHDL.py" 
+
+- (11.06.21): Solved Error occuring for divison operation: inserted if-condition to check for division by zero and return nan in "genFctnSORN" in "design_SORNHDL.py" 
+
+- TODO: (MB 11.01.21) Überprüfen der Funktionalität der Grundkomponenten ADD und MUL für Datentyp mit 0.2er-Schritten (lin13 in BA Jan Schäfer) --> Vergleich mit händisch implementierten 1D-LUTs weißt Unterschiede auf.
+
+- TODO: (MB 12.07.23) Bei datentype ohne "negative" option functioniert die einbindung der offen/geschlossen grenzen der null nicht korrekt

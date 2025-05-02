@@ -1,0 +1,17 @@
+CHANGELOG sorngen
+
+24-09-16:
+
+Additions:
+1/ the tool now provides a GUI (App.py)
+
+Major Changes:
+1/ the tool is now organised as a python tool. All imports are now relative to the projects root (stable)
+2/ the output directory can now be specified after the specification file (e.g. 'python3 -m specification.sorn ../')
+
+Minor Changes:
+1/ some python conventions have been enforced at some places (e.g. file formatting) to ensure readability
+2/ the designflow steps are now defined as centralized functions
+3/ the tool may now use custom environment variables to work properly ('standalone' and 'specification')
+4/ the class 'stable.control.ctrl_env.sorn_env' now stores its values as explicit instance variables (uses '__init__()' instead of class constants)
+5/ add simple 'versioning', it is not automated however

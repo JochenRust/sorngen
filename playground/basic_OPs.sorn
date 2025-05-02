@@ -1,0 +1,127 @@
+@Name test
+@datatype ["lin","[0,2,1]","Zero","infty","negative"]
+#@datatype ["man","{[-inf,-2);[-2,-1.5);[-1.5,-1);[-1,-0.75);[-0.75,-0.5);[-0.5,-0.5];(-0.5,-0.25);[-0.25,0);[0,0];(0,0.25];(0.25,0.5);[0.5,0.5];(0.5,0.75];(0.75,1];(1,1.5];(1.5,2];(2,inf]}"]
+@pipeline 0
+
+
+################## Function Definition: ###################
+
+########## not merged ##########
+
+### addsqr
+#z1 = y**3*x**2
+#z = z1**2
+
+### sqradd
+z1 = x**2
+z = z1+y
+
+### mulsqr
+#z1 = x*y
+#z = z1**2
+
+### sqrmul
+#z1 = x**2
+#z = z1*y
+
+### addsqrt
+#z1 = x+y
+#z = sqrt(z1)
+
+### sqrtadd
+#z1 = sqrt(x)
+#z = z1+y
+
+### mulsqrt
+#z1 = x*y
+#z = sqrt(z1)
+
+### sqrtmul
+#z1 = sqrt(x)
+#z = z1*y
+
+### addlog
+#z1 = x+y
+#z = log(z1)
+
+### logadd
+#z1 = log(x)
+#z = z1+y
+
+### mullog
+#z1 = x*y
+#z = log(z1)
+
+### logmul
+#z1 = log(x)
+#z = z1*y
+
+### addexp
+#z1 = x+y
+#z = exp(z1)
+
+### expadd
+#z1 = exp(x)
+#z = z1+y
+
+### mulexp
+#z1 = x*y
+#z = exp(z1)
+
+### expmul
+#z1 = exp(x)
+#z = z1*y
+
+########## merged ###########
+
+### addsqr
+#z = (x+y)**2
+
+### sqradd
+#z = (x**2)+y
+
+### mulsqr
+#z = (x*y)**2
+
+### sqrmul
+#z = (x**2)*y
+
+### addsqrt
+#z = sqrt(x+y)
+
+### sqrtadd
+#z = sqrt(x)+y
+
+### mulsqrt
+#z = sqrt(x*y)
+
+### sqrtmul
+#z = sqrt(x)*y
+
+### addlog
+#z = log(x+y)
+
+### logadd
+#z = log(x)+y
+
+### mullog
+#z = log(x*y)
+
+### logmul
+#z = log(x)*y
+
+### addexp
+#z = exp(x+y)
+
+### expadd
+#z = exp(x)+y
+
+### mulexp
+#z = exp(x*y)
+
+### expmul
+#z = exp(x)*y
+
+
+
+

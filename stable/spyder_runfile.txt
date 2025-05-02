@@ -1,0 +1,1 @@
+runfile('D:/Seafile/Seafile/Projekte/SORN/HW-GEN_(TCAD20)/Moritz/python/archive&playground/fused_3in_spyder/sorngen.py', wdir='D:/Seafile/Seafile/Projekte/SORN/HW-GEN_(TCAD20)/Moritz/python/archive&playground/fused_3in_spyder', args='./inputs/basic_OPs_diss.sorn')

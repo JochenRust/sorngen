@@ -1,0 +1,13 @@
+\newcommand{\parv}[1]{\vspace{#1}}
+\newcommand{\parvh}[2]{\vspace{#1} \hspace{#2}}
+
+\newcommand{\newpar}{\parv{8pt}}
+\newcommand{\newparind}{\parvh{4pt}{16pt}}
+
+\newcommand{\command}[1]{
+\begin{center}
+\newpar #1 \newpar
+\end{center}
+}
+\newcommand{\needed}[1]{\textless#1\textgreater}
+\newcommand{\optional}[1]{[#1]}
