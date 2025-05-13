@@ -1,1 +1,1 @@
-runfile('D:/Seafile/Seafile/Projekte/SORN/HW-GEN_(TCAD20)/Moritz/python/archive&playground/fused_3in_spyder/sorngen.py', wdir='D:/Seafile/Seafile/Projekte/SORN/HW-GEN_(TCAD20)/Moritz/python/archive&playground/fused_3in_spyder', args='./inputs/basic_OPs_diss.sorn')
+runfile('C:\Users\Administrator\Documents\GitHub\sorngen\stable\sorngen.py', wdir='C:\Users\Administrator\Documents\GitHub\sorngen\playground', args='./inputs/basic_OPs.sorn')
