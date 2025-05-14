@@ -1,0 +1,5 @@
+TODOS sorngen
+
+1/ [MB] implementation of "text-based" functions with more than one input like "hypot(x,y)". Currently only sinlge-input functions like "sqrt(x)" are implemented
+
+2/ [MB] for every design run add the generation of a SORN vhdl package which inlcudes the datatype, SORN width, etc. The package can be used with generic FxD2SORN and SORN2FxD vhdl modules which are also to be added to the repo. Alternatively generate datatype-specific conversion functions in every design run. Both versions could also be selectable as an optional parameter in the specification file / GUI
