@@ -40,6 +40,7 @@ The specification file has a '.sorn' ending and contains all information about n
 3. execute 'python3 -m stable.sorngen \<specification file> \[output directory]'
 
 ### examples: 
+- Copy the contents from .playground/example to your local ./playground directory (do not make any changes within .playground/example)
 - To generate code in the current directory: 
   - 'python3 -m stable.sorngen ./playground/basic_OPs.sorn'
 - To generate code in a specific directory (e.g., playground):
