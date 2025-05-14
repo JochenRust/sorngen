@@ -5,13 +5,13 @@ CHANGELOG sorngen
 Minor Changes:
 1/ Changed the example path in ./playground and added a new entry to the readme to copy the contents from ./playground/example to ./playground before running it (otherwise changes in ./playground/example will not be covered by the .gitignore because the files were created before the gitignore)
 
-2./ inlcuded fraction package in .stable/designflow/design_SORN.py and .stable/designflow/design_SORNHDL.py to allow fractions in SORN datatype definition
+2/ inlcuded fraction package in .stable/designflow/design_SORN.py and .stable/designflow/design_SORNHDL.py to allow fractions in SORN datatype definition
 
-3./ added rounding functions in .stable/designflow/design_SORN.py section 2.6.1/ and .stable/designflow/design_SORNHDL.py to avoid wrong rounding resulting from unsufficient precision in DT generation and LUT entry calculation
+3/ added rounding functions in .stable/designflow/design_SORN.py section 2.6.1/ and .stable/designflow/design_SORNHDL.py to avoid wrong rounding resulting from unsufficient precision in DT generation and LUT entry calculation
 
-4./ fixed an issue with open/closed zero interval bounds when using datatypes without negatives in .stable/designflow/design_SORN.py section 3/
+4/ fixed an issue with open/closed zero interval bounds when using datatypes without negatives in .stable/designflow/design_SORN.py section 3/
 
-5./ fixed an issue with division by zero resulting in NaN only when zero is an inlcuded interval bound, and in inf if the divisor has an open zero interval. In .stable/designflow/design_SORNHDL.py
+5/ fixed an issue with division by zero resulting in NaN only when zero is an inlcuded interval bound, and in inf if the divisor has an open zero interval. In .stable/designflow/design_SORNHDL.py
 
 24-09-16:
 
