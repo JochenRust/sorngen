@@ -9,6 +9,8 @@ Minor Changes:
 
 3./ added rounding functions in .stable/designflow/design_SORN.py section 2.6.1/ to avoid wrong rounding resulting from unsufficient precision 
 
+4./ fixed an issue with open/closed zero interval bounds when using datatypes without negatives in .stable/designflow/design_SORN.py section 3/
+
 24-09-16:
 
 Additions:

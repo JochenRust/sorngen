@@ -93,18 +93,30 @@ def createSORN(style,res_str,*varargs):
 		condSeq_RIGHT = []
 	
 		for index in range(0,len(valSeq_LEFT)):
-			# 3.1/ negative values
-			if index < (len(valSeq_LEFT)-1)/2: 
-				condSeq_LEFT.append(0) 
-				condSeq_RIGHT.append(1)
-			# 3.2/ zero value
-			elif index == (len(valSeq_LEFT)-1)/2: 
-				condSeq_LEFT.append(0)
-				condSeq_RIGHT.append(0)
-			# 3.3/ positive values				
-			elif index > (len(valSeq_LEFT)-1)/2: 
-				condSeq_LEFT.append(1) 
-				condSeq_RIGHT.append(0)
+			# 3.1/ negative and zero values     (changed/added by MB 20-01-2025 to fix an issue with open/closed zero interval bounds when using datatypes without negatives)
+			if ENABLE_NEGATIVE and ENABLE_ZERO:
+                # negatives
+				if index < (len(valSeq_LEFT)-1)/2:
+					condSeq_LEFT.append(0) 
+					condSeq_RIGHT.append(1)
+                # zero
+				elif index == (len(valSeq_LEFT)-1)/2: 
+					condSeq_LEFT.append(0)
+					condSeq_RIGHT.append(0)
+                # positives
+				elif index > (len(valSeq_LEFT)-1)/2: 
+					condSeq_LEFT.append(1) 
+					condSeq_RIGHT.append(0)
+			# 3.2/ zero value without negatives or no exact zero value                
+			else:
+                # zero (exact or in first interval)
+				if index == 0: 
+					condSeq_LEFT.append(0)
+					condSeq_RIGHT.append(0)
+                # positives
+				elif index > 0: 
+					condSeq_LEFT.append(1) 
+					condSeq_RIGHT.append(0)
 				
 	elif ENABLE_MANUAL == 1:
 	
