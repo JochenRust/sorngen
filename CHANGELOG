@@ -1,5 +1,10 @@
 CHANGELOG sorngen
 
+25-05-14:
+
+Minor Changes:
+1/ Changed the example path in ./playground and added a new entry to the readme to copy the contents from ./playground/example to ./example before running it (otherwise changes in ./playground/example will not be covered by the .gitignore because the files were created before the gitignore)
+
 24-09-16:
 
 Additions:
