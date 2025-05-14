@@ -75,9 +75,9 @@ def createSORN(style,res_str,*varargs):
 		# 2.6/ linear style
 		elif ENABLE_LINEAR == 1: 
 			# 2.6.1/ positive numbers
-			for element_CNT in range(int(res[0]/res[2]),int(res[1]/res[2])):
-				valSeq_LEFT.append(element_CNT*res[2]) 
-				valSeq_RIGHT.append((element_CNT+1)*res[2]) 
+			for element_CNT in range(int(res[0]/res[2]),int(round(res[1]/res[2]))):     # round() added by MB 14-11-24 because 0.15/0.5 was calculated to 2.99999 and rounded to 2 instead of 3
+				valSeq_LEFT.append(round(element_CNT*res[2],15))    # round(...,15) added by MB 14-11-24 because 3*0.05 results in 0.15000000000000002
+				valSeq_RIGHT.append(round((element_CNT+1)*res[2],15)) 
 		# 2.7/ infinity
 		if ENABLE_INFTY == 1:
 			valSeq_LEFT.append(valSeq_RIGHT[-1])

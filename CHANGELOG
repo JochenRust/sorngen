@@ -7,6 +7,8 @@ Minor Changes:
 
 2./ inlcuded fraction package in .stable/designflow/design_SORN.py and .stable/designflow/design_SORNHDL.py to allow fractions in SORN datatype definition
 
+3./ added rounding functions in .stable/designflow/design_SORN.py section 2.6.1/ to avoid wrong rounding resulting from unsufficient precision 
+
 24-09-16:
 
 Additions:
