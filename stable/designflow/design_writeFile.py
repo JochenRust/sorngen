@@ -402,6 +402,7 @@ def writeToVHDL(env):
 				if cInst.nodeSST.type == sst.typeNode.REGISTER: continue
 #               write2VHDL(cInst.FctnTable,'name',cInst.FctnTable.name)
 				writeFunctionToVHDL(env, cInst.FctnTable, cInst.FctnTable.name, st)
+                # writeFunctionToVHDL(env, cInst.FctnTable, env.name+"_"+cInst.FctnTable.name, st)   # env.name added by MB 30-07-2024 to change entity name of LUT modules to inlcude the design name; not compatible with top level modules, use only when using the basic LUT modules without toplevels
 				print("  Submodule: "+cInst.name+" generated")
 
 	print(f"SUCCESS: VHDL data generated in {os.path.abspath(env.save_path)}")
