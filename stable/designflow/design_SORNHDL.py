@@ -134,8 +134,13 @@ def genFctnSORN(function,*datatypes):
             FctnTab.resultSORN.append([]) # create an (empty) row in the matrix "resultSORN"
             for op1CTR in range(0,len(FctnTab.datatypeIN1.intervals)): # loop over OP1
                 FctnTab.resultSORN[op0CTR].append([]) # create an (empty) col in the matrix "resultSORN"
+                
+                # handle signs // added by MR 08.10.24
+                OPa_is_neg = (np.sign(FctnTab.datatypeIN0.intervals[op0CTR].lowerBoundary) == -1.0) 
+                OPb_is_neg = (np.sign(FctnTab.datatypeIN1.intervals[op1CTR].lowerBoundary) == -1.0)
+                divisor_Interval_Contains_Zero = True if(FctnTab.datatypeIN1.intervals[op1CTR].lowerBoundary < 0 < FctnTab.datatypeIN1.intervals[op1CTR].upperBoundary) else False
             
-                    # left bound of result
+                # left bound of result
                 c_startValue = np.inf
                 for caseCTR in range(0,4):
                 #define for two operands (lower or upper boundary) and convert them to strings
@@ -160,8 +165,14 @@ def genFctnSORN(function,*datatypes):
 #                       c_intValue = eval(cFctn)
 #                   except NameError:
 #                       c_intValue = eval('np.'+cFctn)
-                   if np.count_nonzero(eval(OPb)) == 0 and cFctn.find("/") > -1: # added by MB 11.06.21: search for division by zero
+                   if np.count_nonzero(eval(OPb)) == 0 and cFctn.find("/") > -1 and OPb_isopen == False: # added by MB 11.06.21: search for divison by zero, changed by MR 08.10.2024: division by zero = NaN only when Interval closed (0 within) otherwhise inf
                         c_intValue = np.nan
+                   elif np.count_nonzero(eval(OPb)) == 0 and cFctn.find("/") > -1 and OPb_isopen == True and np.count_nonzero(eval(OPa)) == 0:
+                        c_intValue = np.nan
+                   elif np.count_nonzero(eval(OPb)) == 0 and cFctn.find("/") > -1 and OPb_isopen == True and (OPa_is_neg ^ OPb_is_neg): #added by MR 08.10.24 division by zero = NaN only when Interval closed (0 within) otherwhise inf
+                       c_intValue = -np.inf
+                   elif np.count_nonzero(eval(OPb)) == 0 and cFctn.find("/") > -1 and OPb_isopen == True and not(OPa_is_neg ^ OPb_is_neg): #added by MR 08.10.24 division by zero = NaN only when Interval closed (0 within) otherwhise inf
+                       c_intValue = np.inf
                    else:
                         c_intValue = round(eval(cFctn),14)              # round(...,14) added by MB 14-11-24 because 0.05 - 0.15 results in -0.09999999999999999
                         #c_intValue = eval(OPa + FctnTab.OP + OPb)
@@ -204,8 +215,14 @@ def genFctnSORN(function,*datatypes):
 #                    except NameError:
 #                        c_intValue = eval('np.'+cFctn)
           
-                    if np.count_nonzero(eval(OPb)) == 0 and cFctn.find("/") > -1: # added by MB 11.06.21: search for division by zero
+                    if np.count_nonzero(eval(OPb)) == 0 and cFctn.find("/") > -1 and OPb_isopen == False: # added by MB 11.06.21: search for divison by zero, changed by MR 08.10.2024: division by zero = NaN only when Interval closed (0 within) otherwhise inf
                         c_intValue = np.nan
+                    elif np.count_nonzero(eval(OPb)) == 0 and cFctn.find("/") > -1 and OPb_isopen == True and np.count_nonzero(eval(OPa)) == 0: # added by MR 08.10.24 division by zero; if denominator is 0, then result is 0
+                         c_intValue = np.nan
+                    elif np.count_nonzero(eval(OPb)) == 0 and cFctn.find("/") > -1 and OPb_isopen == True and (OPa_is_neg ^ OPb_is_neg): #added by MR 08.10.24 division by zero = NaN only when Interval closed (0 within) otherwhise inf
+                        c_intValue = -np.inf
+                    elif np.count_nonzero(eval(OPb)) == 0 and cFctn.find("/") > -1 and OPb_isopen == True and not(OPa_is_neg ^ OPb_is_neg): #added by MR 08.10.24 division by zero = NaN only when Interval closed (0 within) otherwhise inf
+                        c_intValue = np.inf
                     else:
                         c_intValue = round(eval(cFctn),14)              # round(...,14) added by MB 14-11-24 because 0.05 - 0.15 results in -0.09999999999999999
                     #print(cFctn)

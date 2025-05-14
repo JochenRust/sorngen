@@ -11,6 +11,8 @@ Minor Changes:
 
 4./ fixed an issue with open/closed zero interval bounds when using datatypes without negatives in .stable/designflow/design_SORN.py section 3/
 
+5./ fixed an issue with division by zero resulting in NaN only when zero is an inlcuded interval bound, and in inf if the divisor has an open zero interval. In .stable/designflow/design_SORNHDL.py
+
 24-09-16:
 
 Additions:
