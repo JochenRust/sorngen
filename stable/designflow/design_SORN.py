@@ -17,7 +17,7 @@ import re
 import numpy as np
 from ..datatypes import type_SORN as SORN
 from ..datatypes.type_SORN import sornInterval
-# from fractions import Fraction
+from fractions import Fraction
 
 # function defineSORN 
 def createSORN(style,res_str,*varargs):

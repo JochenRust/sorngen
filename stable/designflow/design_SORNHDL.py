@@ -19,7 +19,7 @@ import numpy as np
 from ..datatypes.type_SORN import sornInterval
 from ..datatypes.type_SORN import sornFctnTable
 from ..datatypes.type_SORN import type_SORN                    # added by MB/Chen 21.10.22
-# from fractions import Fraction
+from fractions import Fraction
 
 ##def genFctnSORN(OP,*datatypes):
 def genFctnSORN(function,*datatypes):
