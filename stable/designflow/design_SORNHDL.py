@@ -163,7 +163,7 @@ def genFctnSORN(function,*datatypes):
                    if np.count_nonzero(eval(OPb)) == 0 and cFctn.find("/") > -1: # added by MB 11.06.21: search for division by zero
                         c_intValue = np.nan
                    else:
-                        c_intValue = eval(cFctn)
+                        c_intValue = round(eval(cFctn),14)              # round(...,14) added by MB 14-11-24 because 0.05 - 0.15 results in -0.09999999999999999
                         #c_intValue = eval(OPa + FctnTab.OP + OPb)
                         
                    if c_intValue < c_startValue:
@@ -207,7 +207,7 @@ def genFctnSORN(function,*datatypes):
                     if np.count_nonzero(eval(OPb)) == 0 and cFctn.find("/") > -1: # added by MB 11.06.21: search for division by zero
                         c_intValue = np.nan
                     else:
-                        c_intValue = eval(cFctn)
+                        c_intValue = round(eval(cFctn),14)              # round(...,14) added by MB 14-11-24 because 0.05 - 0.15 results in -0.09999999999999999
                     #print(cFctn)
                     #c_intValue = eval(OPa + FctnTab.OP + OPb)
                     if c_intValue > c_endValue: 
@@ -242,8 +242,8 @@ def genFctnSORN(function,*datatypes):
                 # generate the SORN result
                 c_SORN = []
                 for poolCTR in range(0,len(FctnTab.datatypeOUT.intervals)):
-                    c_poolStartValue = FctnTab.datatypeOUT.intervals[poolCTR].lowerBoundary
-                    c_poolEndValue = FctnTab.datatypeOUT.intervals[poolCTR].upperBoundary
+                    c_poolStartValue = round(float(FctnTab.datatypeOUT.intervals[poolCTR].lowerBoundary),14)    # round((float(...),14) added by MB 26-11-24 to match the rounding of c_intValue from above
+                    c_poolEndValue = round(float(FctnTab.datatypeOUT.intervals[poolCTR].upperBoundary),14)      # round((float(...),14) added by MB 26-11-24 to match the rounding of c_intValue from above
                     c_poolLowerIsOpen = FctnTab.datatypeOUT.intervals[poolCTR].lowerIsOpen
                     c_poolUpperIsOpen = FctnTab.datatypeOUT.intervals[poolCTR].upperIsOpen
                     if (c_endValue < c_poolStartValue) or ((c_endValue == c_poolStartValue) and (c_upperIsOpen == 1 or c_poolLowerIsOpen == 1)) or (c_startValue > c_poolEndValue) or ((c_startValue == c_poolEndValue) and (c_lowerIsOpen == 1 or c_poolUpperIsOpen == 1)):
