@@ -5,6 +5,8 @@ CHANGELOG sorngen
 Minor Changes:
 1/ Changed the example path in ./playground and added a new entry to the readme to copy the contents from ./playground/example to ./playground before running it (otherwise changes in ./playground/example will not be covered by the .gitignore because the files were created before the gitignore)
 
+2./ inlcuded fraction package in .stable/designflow/design_SORN.py and .stable/designflow/design_SORNHDL.py to allow fractions in SORN datatype definition
+
 24-09-16:
 
 Additions:
