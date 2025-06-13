@@ -4,11 +4,12 @@ TODOS sorngen
 
 2/ Conversion Functions:
 For every design run add the generation of a SORN vhdl package which inlcudes the datatype, SORN width, etc. The package can be used with generic FxD2SORN and SORN2FxD vhdl modules which are also to be added to the repo. Alternatively generate datatype-specific conversion functions in every design run. Both versions could also be selectable as an optional parameter in the specification file / GUI
-Edit/Remark: how to handle different versions of fxd-package in VHDL? Might have to be implemented w/o fxd types.
+2.1/ how to handle different versions of fxd-package in VHDL? Might have to be implemented w/o fxd types.
+2.2/ add functional conversion functions 
 
 3/ Testbenches:
 For every generated design add a testbench for the toplevel design. How should stimuli be inlcuded? (random, exhaustive, ...)
 
 4/ High-Level/Software reference model in C/Python/...
 
-5/ Quantisierung der Intervallgrenze in Python einstellbar.
+5/ Quantisierung der Intervallgrenzen in Python einstellbar.
