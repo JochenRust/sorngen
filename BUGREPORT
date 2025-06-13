@@ -1,0 +1,10 @@
+BUGREPORT sorngen
+
+13-06-2025 (MB/JR/NH)
+
+- Error in design_elaborator.merge when running MIMO_Solver_N2 and _N4
+
+13-06-2025 (MB/JR/NH)
+
+- RAM exeeded in robotic kinematics example
+- Input ports with the same label are generated in the toplevel VHDL file
