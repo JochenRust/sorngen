@@ -7,4 +7,4 @@ BUGREPORT sorngen
 13-06-2025 (MB/JR/NH)
 
 - RAM exeeded in robotic kinematics example
-- Input ports with the same label are generated in the toplevel VHDL file
+- Input ports with the same label are generated in the toplevel VHDL file (Issue seems to also propogate to submodules in some examples)
