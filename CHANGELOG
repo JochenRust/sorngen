@@ -1,5 +1,10 @@
 CHANGELOG sorngen
 
+25-06-19:
+Bugfixes:
+1/ #01 SOLVED: removed duplicated names in the toplevel by comparison of existing names in the portlevel list to the actual from the varlist (see design_HDL.py, line 156)
+2/ #02 SOLVED: changes deepcopy for HDL instance generation to copy command to reduce the memory allocation effort (see type_HDL.py, line 39) 
+
 25-05-14:
 
 Minor Changes:

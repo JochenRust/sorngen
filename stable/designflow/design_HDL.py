@@ -14,7 +14,7 @@
 # import ast
 import re
 
-# import sys
+import sys
 
 from stable.datatypes import type_HDL as dp
 from stable.datatypes import type_SST as sst
@@ -138,7 +138,7 @@ def createToplevelInstance(env):
 
     ## 1/ default assignments and preliminaries
     # cPortNameDict = {}
-    print("creating toplevel instance...",end="")
+    print("creating toplevel instance...",end="\n")
     HDL = dp.sornHDL(env.name)
     HDL.isToplevel = True
     # internalConnect = {}
@@ -152,6 +152,18 @@ def createToplevelInstance(env):
         newPort.isInput  = False
         for varNode in SST.varNodes:
             if not (varNode.siblings == []): continue
+
+            ### #01 BUGFIX
+            # check for equal names in submodules:
+            # rationale: skip, if the name of the actual variable (== toplevel input port) already exists
+            #            in the toplevel port list
+            skipFlag = 0
+            for port in HDL.ports:
+                if (varNode.name == port.name):
+                    skipFlag = 1
+            if (skipFlag == 1): continue
+            ### #01 END OF BUGFIX
+            
             newPort = dp.sornPort(HDL)
             newPort.name = varNode.name
             newPort.isGlobal = True

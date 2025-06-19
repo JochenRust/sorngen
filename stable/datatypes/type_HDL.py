@@ -35,13 +35,28 @@ class sornHDL:
     self.idInst.clear()
 
   def deepcopy(self):
+
+    ## #02 BUGFIX
+    ## rationale: replaced deepcopy command by copy command to save memory resources
+    
+#    newInst = sornHDL(self.name)
+#    newInst.name = copy.deepcopy(self.name)
+#    newInst.name = self.name
+#    newInst.datatype = copy.deepcopy(self.datatype)
+#    newInst.ports = copy.deepcopy(self.ports)
+#    newInst.instances = copy.deepcopy(self.instances)
+#    newInst.nets = copy.deepcopy(self.nets)
+#    newInst.idInst = copy.deepcopy(self.idInst)
+
     newInst = sornHDL(self.name)
-    newInst.name = copy.deepcopy(self.name)
-    newInst.datatype = copy.deepcopy(self.datatype)
-    newInst.ports = copy.deepcopy(self.ports)
-    newInst.instances = copy.deepcopy(self.instances)
-    newInst.nets = copy.deepcopy(self.nets)
-    newInst.idInst = copy.deepcopy(self.idInst)
+    newInst.name = copy.copy(self.name)
+    newInst.datatype = copy.copy(self.datatype)
+    newInst.ports = copy.copy(self.ports)
+    newInst.instances = copy.copy(self.instances)
+    newInst.nets = copy.copy(self.nets)
+    newInst.idInst = copy.copy(self.idInst)
+    ## #02 END OF BUGFIX
+
     return newInst
 
   def show(self):
