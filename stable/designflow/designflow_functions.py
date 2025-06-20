@@ -4,10 +4,15 @@
 ##
 ## description: provides functions for every designflow step
 ##
-## (c) 2024 Jochen Rust
-##     DSI aerospace technology
+## (c) 2020-25 
+##     Hamburg University of Applied Sciences
+##     University of Bremen
+##
+## Contributors
+##  Jochen Rust, Moritz Bärthel, Nils Hülsmeier, Marvin Henkel
 ##
 ##################################################################
+
 import os
 import sys
 

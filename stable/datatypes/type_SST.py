@@ -162,16 +162,24 @@ class sornSyntaxTree:
         if oldNode is None or newNode is None:
             print("ERROR: one or two node that should be merged do(es) not exist.")
             sys.exit(9)
-        
         newNode.parent = oldNode.parent
         newNode.parentId = id(oldNode.parent)
  #       newNode.name = oldNode.name
 
         # reset parent siblings
+## BUGFIX i#01: third parent sibling has to be explicitly considered when merging is performed
+        #if oldNode.parent.siblings[0] == oldNode:
+        #    oldNode.parent.siblings[0] = newNode
+        #elif len(oldNode.parent.siblings) == 2:
+        #    oldNode.parent.siblings[1] = newNode
+
         if oldNode.parent.siblings[0] == oldNode:
             oldNode.parent.siblings[0] = newNode
-        elif len(oldNode.parent.siblings) == 2:
+        elif oldNode.parent.siblings[1] == oldNode:
             oldNode.parent.siblings[1] = newNode
+        elif oldNode.parent.siblings[2] == oldNode:
+            oldNode.parent.siblings[2] = newNode
+## END OF BUGFIX i#01: 
 
         # 1/ get node id
         oldNodeId = id(oldNode)
@@ -208,15 +216,66 @@ class sornSyntaxTree:
         
 
     def show(self):
-        print("# ===== Sorn Syntax Tree '"+self.name+"' ===== #")
-        print("SST depth: "+str(self.SSTDepth))
-        print("Nodes: ")
 
-        for node in self.nodes:
-            node.show()
+        print("# ===== Sorn Syntax Tree '"+self.name+"' NODES ===== #")
+        print("SST depth: "+str(self.SSTDepth))
+
+        self.showTree()
+#        print("Nodes: ")
+#        for node in self.nodes:
+#            node.show()
             
         print("# ===== "+str(len(self.nodes))+" node(s) found ====== #")
         print("")
+
+
+    def showNode(self, currentNode, indent):
+        # markl root nodes with []
+        if (currentNode.isRoot):
+            print("["+currentNode.name+"("+str(len(currentNode.siblings))+")]", end="")
+            # return if subtree root is detected
+            if (indent != 0):
+                print("")
+                return
+            indent +=2
+        else:
+            print(currentNode.name+"("+str(len(currentNode.siblings))+")", end="")
+        
+        indent += len(currentNode.name) + 3; # +3 due to (x) suffix
+#        print(" "*indent, end="")
+        if (len(currentNode.siblings) == 0):
+            print("")
+            return
+        if (len(currentNode.siblings) == 1):
+            print("->", end="")
+            self.showNode(currentNode.siblings[0], indent)
+            return
+        indent +=2
+        if (len(currentNode.siblings) == 2):
+            print("->", end="")
+            self.showNode(currentNode.siblings[0], indent)
+            print(" "*indent+"|")
+            print(" "*indent+"->", end="")
+            self.showNode(currentNode.siblings[1], indent)
+            return
+        if (len(currentNode.siblings) == 3):
+            print("->", end="")
+            self.showNode(currentNode.siblings[0], indent)
+            print(" "*indent+"|")
+            print(" "*indent+"->", end="")
+            self.showNode(currentNode.siblings[1], indent)
+            print(" "*indent+"|")
+            print(" "*indent+"->", end="")
+            self.showNode(currentNode.siblings[2], indent)
+            return
+        return
+    
+    def showTree(self):
+
+        self.showNode(self.rootNode, 0)
+        
+            
+            
 
 
 

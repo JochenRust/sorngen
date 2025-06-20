@@ -4,8 +4,12 @@
 ##
 ## description: sorngen main file
 ##
-## (c) 2020 Jochen Rust
-##     DSI aerospace technology
+## (c) 2020-25 
+##     Hamburg University of Applied Sciences
+##     University of Bremen
+##
+## Contributors
+##  Jochen Rust, Moritz Bärthel, Nils Hülsmeier, Marvin Henkel
 ##
 ##################################################################
 
@@ -26,8 +30,8 @@ def info():
     print("##")
     print("## SORNGEN - Sets Of Real Numbers HDL generator")
     print("##")
-    print("## (c) 2025 Hamburg University of Applied Sciences")
-    print("##          University of Bremen")
+    print("## (c) 2020-2025 Hamburg University of Applied Sciences")
+    print("##               University of Bremen")
     print("##")
     print(f"## {version}")
     print("##")
@@ -41,6 +45,7 @@ def main():
     ## 2/ elaborate
     run_elaboration(env)
 
+    env.SSTs[0].showTree()
     ## 3/ generate sorn HDL data
     run_arch_builder(env)
 

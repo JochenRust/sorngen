@@ -166,12 +166,17 @@ def merge(env, *varargs):
 
     print("# ===== Merge Nodes =============== #")
     print("")
-    # 1/ numeric reduction
+
+    
+#############################################################################    
+# 1/ numeric reduction
     if num:
         print("# === Merge/remove NUMERICS:")
         numNodes = []
         # iterate through all SSTs
         for SST in env.SSTs:
+
+
             # iterate through all nodes of current SST
             for node in SST.nodes:
 
@@ -192,7 +197,8 @@ def merge(env, *varargs):
 
     # env.show()
 
-    # 3/ trivariate merging/fusing      # added by MB 24.10.22
+#############################################################################    
+# 3/ trivariate merging/fusing      # added by MB 24.10.22
     if trivar:
         print("# === Merge trivariate arithmetic functions:")
         # iterate through all SSTs
@@ -242,6 +248,7 @@ def merge(env, *varargs):
                     # remove fused sibling from SST
                     SST.remove(node.siblings[fusedSib])
 
+                    
                     # update siblings
                     node.siblings.insert(fusedSib, savedSib.siblings[0])
                     node.siblings.insert(fusedSib + 1, savedSib.siblings[1])
@@ -251,19 +258,31 @@ def merge(env, *varargs):
                     # update node.name
                     node.name = savedSib.name + node.name
 
+## BUGFIX i#01: new ternary node must be registered to the node dictonary
+                    # register this node to SST
+                    SST.nodes[SST.nodes.index(node)] = node
+                    SST.dictId[id(node)] = node
+                    SST.dictNameNode[node.name] = node
+## END OF BUGFIX i#01
+                    
+                    
                     # display new merged/fused node
-                    print("merged to")
-                    print(" ", end="")
-                    node.show()
-                    print("#")
+                    #print("merged to")
+                    #print(" ", end="")
+                    #node.show()
+                    #print("#")
 
-    # 2/ univariate merging
+#############################################################################    
+# 2/ univariate merging
     if univar:
         print("# === Merge univariate arithmetic functions:")
         # iterate through all SSTs
+        
+
         for SST in env.SSTs:
             isTouched = True
             while isTouched:
+
                 isTouched = False
                 # iterate through all nodes of current SST
                 for node in SST.nodes:
@@ -274,13 +293,16 @@ def merge(env, *varargs):
                     # get parent
                     parent = node.parent
                     if parent.type == typeNode.ROOT: continue
+
+                    # UNIVARIATE MERGE handling
+                    
                     if len(parent.siblings) == 1 or ((len(parent.siblings) == 2 or len(parent.siblings) == 3) and len(
                             node.siblings) == 1):  # after "or": added by MB 27.01.21: Before: Merge only if parent node has just one sibling. Now: Also merge if parent node has 2 or 3 siblings but current node has only one sibling.
-                        print(" ", end="")
+                        #print(" ", end="")
 
-                        parent.show()
-                        print(" ", end="")
-                        node.show()
+                        #parent.show()
+                        #print(" ", end="")
+                        #node.show()
 
                         # register this node to SST
                         SST.nodes[SST.nodes.index(node)] = node
@@ -343,15 +365,18 @@ def merge(env, *varargs):
                                     node.siblings.insert(0, savedsibs[1])
                                     node.siblings.insert(0, savedsibs[0])
 
-                        SST.replace(parent, node)
-                        # SST.show()
 
+
+                        SST.replace(parent, node)
+
+                        SST.show()
+                        
                         # set touched flag
                         isTouched = True
-                        print("merged to")
-                        print(" ", end="")
-                        node.show()
-                        print("#")
+                        #print(" ", end="")
+                        #node.show()
+                        #print("#")
+                        
         print("")
 
     # x/ some output stuff
