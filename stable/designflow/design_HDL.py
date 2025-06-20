@@ -231,9 +231,16 @@ def createToplevelInstance(env):
 def generateFunctionTable(env):
     
 
+    print("# ==== SORN FUNCTION TABLE GENERATION ==== #")
     ## 1/ iterate through HDL instances
+    HDLctr = 0
     for cHDL in env.dictHDL:
+        INSTctr = 0
+        print("# == Generating SORN function tables for module module '"+env.dictHDL[cHDL].name+"' ",end="")
+        print("[%3.2f%%] == #"% ((HDLctr*len(env.dictHDL)+INSTctr)/(len(env.dictHDL)*len(env.dictHDL))*100))
+        INSTctr += 1
         for cInst in env.dictHDL[cHDL].instances:
+            print(" Function Table: "+cInst.name)
             if cInst.nodeSST.type == sst.typeNode.REGISTER: continue
             ## 2/ determine the kind of operation (one, two or three operands)
             if len(re.findall(r"<op\d*>",cInst.function)) == 3:     # added by MB 24-10-22
@@ -246,5 +253,7 @@ def generateFunctionTable(env):
                 raise Exception(" ERROR: more than 3 inputs for genFctnSORN are not implemented!")
             
             cInst.FctnTable.name = cInst.name
+        print("")
+        HDLctr += 1
     
 

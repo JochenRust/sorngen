@@ -34,7 +34,7 @@ class sornHDL:
     del self.nets[:]
     self.idInst.clear()
 
-  def deepcopy(self):
+  def copy(self):
 
     ## #02 BUGFIX
     ## rationale: replaced deepcopy command by copy command to save memory resources

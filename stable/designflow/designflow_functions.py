@@ -59,7 +59,7 @@ def run_arch_builder(env):
         # 3.5/ build nets
         HDL = builder.createHDLNetsFromSST(HDL, SST)
         # 3.6/ register HDL data to SORN environment
-        env.dictHDL[SST.name] = HDL.deepcopy()
+        env.dictHDL[SST.name] = HDL.copy()
         env.HDL.append(env.dictHDL[SST.name])
         HDL.show()
         # 3.7/ clear local HDL datatype
