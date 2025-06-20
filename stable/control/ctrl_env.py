@@ -52,6 +52,7 @@ class sornEnv:
           for SST in self.SSTs:
               for node in SST.nodes:
                   if not (node.depth is None):
+                      print(node)
                       for sibling in node.siblings: 
                           sibling.totalDepth = node.totalDepth if sibling.type == typeNode.ROOT else node.totalDepth + 1
                           self.maxDepth = sibling.totalDepth if sibling.totalDepth > self.maxDepth else self.maxDepth

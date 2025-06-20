@@ -141,11 +141,20 @@ class sornSyntaxTree:
         newNode.siblings.append(node)
 
         # reset parent siblings
+## BUGFIX #i04
+#        if node.parent.siblings[0] == node:
+#            node.parent.siblings[0] = newNode
+#        elif len(node.parent.siblings) == 2:
+#            node.parent.siblings[1] = newNode
+
         if node.parent.siblings[0] == node:
             node.parent.siblings[0] = newNode
-        elif len(node.parent.siblings) == 2:
+        elif node.parent.siblings[1] == node:
             node.parent.siblings[1] = newNode
-        
+        elif node.parent.siblings[2] == node:
+            node.parent.siblings[2] = newNode
+## END OF BUGFIX #i04
+            
         node.parent = newNode
         
         self.nodes.append(newNode)
@@ -232,25 +241,28 @@ class sornSyntaxTree:
     def showNode(self, currentNode, indent):
         # markl root nodes with []
         if (currentNode.isRoot):
-            print("["+currentNode.name+"("+str(len(currentNode.siblings))+")]", end="")
+            print("["+currentNode.name+"("+str(len(currentNode.siblings))+","+str(currentNode.depth)+")]", end="")
             # return if subtree root is detected
             if (indent != 0):
                 print("")
                 return
-            indent +=2
         else:
-            print(currentNode.name+"("+str(len(currentNode.siblings))+")", end="")
-        
-        indent += len(currentNode.name) + 3; # +3 due to (x) suffix
-#        print(" "*indent, end="")
+            print(currentNode.name+"("+str(len(currentNode.siblings))+","+str(currentNode.depth)+")", end="")
+
+        # indent handling
+        indent += len(currentNode.name) # name of the node
+        indent += 3 # parenthesis (2) and comma (1)
+        indent += len(str(len(currentNode.siblings))) # length of the first index
+        indent += len(str(currentNode.depth)) # length of the second index
+
         if (len(currentNode.siblings) == 0):
             print("")
             return
+        indent +=2 # arrow
         if (len(currentNode.siblings) == 1):
             print("->", end="")
             self.showNode(currentNode.siblings[0], indent)
             return
-        indent +=2
         if (len(currentNode.siblings) == 2):
             print("->", end="")
             self.showNode(currentNode.siblings[0], indent)

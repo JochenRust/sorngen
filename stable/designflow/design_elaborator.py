@@ -386,14 +386,19 @@ def merge(env, *varargs):
     # re-set depths
     for SST in env.SSTs:
         SST.setDepth('totalDepth', True)
+    env.setTotalDepth()
+    
     return env
 
 
 def insertRegister(env):
     ## 0/ default assignments
+    
     maxDepth = env.maxDepth - 1
     pipelineLocation = []
+    print(maxDepth)
 
+    
     ## 2/ handle pipeline divider
     if isinstance(env.pipeline, int):
         if env.pipeline >= maxDepth:
@@ -411,11 +416,17 @@ def insertRegister(env):
             if cValue in range(maxDepth, 0, -1): pipelineLocation.append(maxDepth - cValue + 1)
 
     env.pipelineLocation = pipelineLocation
-
+    
     # insert register at specified level
     for SST in env.SSTs:
+        SST.show()
         for node in SST.nodes:
-            if node.totalDepth in pipelineLocation:
+            print(node.name)
+            print(node.depth)
+## BUGFIX #i04
+#            if node.totalDepth in pipelineLocation:
+            if node.depth in pipelineLocation:
+## END OF BUGFIX #i04
                 # set up new register node
                 REGnode = sst.sornSyntaxTreeNode(SST)
                 REGnode.ast = typeNode.REGISTER
@@ -426,6 +437,14 @@ def insertRegister(env):
                 SST.insert(REGnode, node)
                 SST.hasRegister = True
                 env.hasRegister = True
+       # sys.exit()
+
+### DEBUG
+    for SST in env.SSTs:
+        SST.show()
+#        sys.exit()
+        
+### END OF DEBUG
 
     # re-set depths
     for SST in env.SSTs:
