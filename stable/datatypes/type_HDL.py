@@ -36,7 +36,7 @@ class sornHDL:
 
   def copy(self):
 
-    ## #02 BUGFIX
+    ## #i02 BUGFIX
     ## rationale: replaced deepcopy command by copy command to save memory resources
     
 #    newInst = sornHDL(self.name)
@@ -55,7 +55,7 @@ class sornHDL:
     newInst.instances = copy.copy(self.instances)
     newInst.nets = copy.copy(self.nets)
     newInst.idInst = copy.copy(self.idInst)
-    ## #02 END OF BUGFIX
+    ## #i02 END OF BUGFIX
 
     return newInst
 

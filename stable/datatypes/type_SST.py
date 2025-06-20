@@ -12,7 +12,7 @@
 import ast
 import re
 import sys
-# import numpy as np
+import numpy as np
 
 
 from ..control import ctrl_env as ctrl
@@ -260,24 +260,24 @@ class sornSyntaxTree:
             return
         indent +=2 # arrow
         if (len(currentNode.siblings) == 1):
-            print("->", end="")
+            print("<-", end="")
             self.showNode(currentNode.siblings[0], indent)
             return
         if (len(currentNode.siblings) == 2):
-            print("->", end="")
+            print("<-", end="")
             self.showNode(currentNode.siblings[0], indent)
             print(" "*indent+"|")
-            print(" "*indent+"->", end="")
+            print(" "*indent+"<-", end="")
             self.showNode(currentNode.siblings[1], indent)
             return
         if (len(currentNode.siblings) == 3):
-            print("->", end="")
+            print("<-", end="")
             self.showNode(currentNode.siblings[0], indent)
             print(" "*indent+"|")
-            print(" "*indent+"->", end="")
+            print(" "*indent+"<-", end="")
             self.showNode(currentNode.siblings[1], indent)
             print(" "*indent+"|")
-            print(" "*indent+"->", end="")
+            print(" "*indent+"<-", end="")
             self.showNode(currentNode.siblings[2], indent)
             return
         return

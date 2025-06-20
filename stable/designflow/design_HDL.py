@@ -153,7 +153,7 @@ def createToplevelInstance(env):
         for varNode in SST.varNodes:
             if not (varNode.siblings == []): continue
 
-            ### #01 BUGFIX
+            ### #i01 BUGFIX
             # check for equal names in submodules:
             # rationale: skip, if the name of the actual variable (== toplevel input port) already exists
             #            in the toplevel port list
@@ -162,7 +162,7 @@ def createToplevelInstance(env):
                 if (varNode.name == port.name):
                     skipFlag = 1
             if (skipFlag == 1): continue
-            ### #01 END OF BUGFIX
+            ### #i01 END OF BUGFIX
             
             newPort = dp.sornPort(HDL)
             newPort.name = varNode.name
@@ -235,10 +235,10 @@ def generateFunctionTable(env):
     ## 1/ iterate through HDL instances
     HDLctr = 0
     for cHDL in env.dictHDL:
-        INSTctr = 0
+#        INSTctr = 0
         print("# == Generating SORN function tables for module module '"+env.dictHDL[cHDL].name+"' ",end="")
-        print("[%3.2f%%] == #"% ((HDLctr*len(env.dictHDL)+INSTctr)/(len(env.dictHDL)*len(env.dictHDL))*100))
-        INSTctr += 1
+        print("[%3.2f%%] == #"% (((1+HDLctr)*len(env.dictHDL))/(len(env.dictHDL)*len(env.dictHDL))*100))
+#        INSTctr += 1
         for cInst in env.dictHDL[cHDL].instances:
             print(" Function Table: "+cInst.name)
             if cInst.nodeSST.type == sst.typeNode.REGISTER: continue
