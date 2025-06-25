@@ -1,5 +1,10 @@
 CHANGELOG sorngen
 
+25-06-25:
+Bugfixes:
+1/ fixed issue with division by open/closed zero for single input reciprocal function (design_SORNHDL.py lines 281-283 and 303-314)
+2/ fixed issue with interval boundaries for single input reciprocal function (design_SORNHDL.py lines 327-330)
+
 25-06-19:
 Bugfixes:
 1/ #01 SOLVED: removed duplicated names in the toplevel by comparison of existing names in the portlevel list to the actual from the varlist (see design_HDL.py, line 156)

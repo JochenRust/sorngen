@@ -278,6 +278,10 @@ def genFctnSORN(function,*datatypes):
                 
     elif FctnTab.Nin == 1:
     
+        # Added by MB 24-06-25: set reciprocal flag
+        symbol = re.findall(r"/",function)
+        reciprocal = 1 if len(symbol) >0 else 0
+    
         # one input
         for op0CTR in range(0,len(FctnTab.datatypeIN0.intervals)): # loop over OP0
         
@@ -295,11 +299,24 @@ def genFctnSORN(function,*datatypes):
                 
                 cFctn = re.sub('<op0>', OPa, function)
                 cFctn = re.sub(r"(Fraction\([^\)]*\))",r"float(\g<1>)",cFctn) # added by MB 02.11.22
-                # handle default and normal functions/operators
-                try:
-                    c_intValue = eval(cFctn)
-                except NameError:
-                    c_intValue = eval('np.'+cFctn)
+                
+                # Added by MB 25-06-25: catch division by open/closed zero for reciprocal
+                OPa_is_neg = (np.sign(FctnTab.datatypeIN0.intervals[op0CTR].lowerBoundary) == -1.0) 
+                OPa_is_zero = (np.count_nonzero(eval(OPa)) == 0)
+                OPa_is_open = FctnTab.datatypeIN0.intervals[op0CTR].lowerIsOpen if (caseCTR == 0) else FctnTab.datatypeIN0.intervals[op0CTR].upperIsOpen
+                if reciprocal and OPa_is_zero and OPa_is_open:
+                    if OPa_is_neg:
+                        c_intValue = -np.inf
+                    else:
+                        c_intValue = np.inf
+                elif reciprocal and OPa_is_zero:
+                    c_intValue = np.nan
+                else:
+                    # handle default and normal functions/operators
+                    try:
+                        c_intValue = eval(cFctn)
+                    except NameError:
+                        c_intValue = eval('np.'+cFctn)
                     
                 if c_intValue < c_startValue or np.isnan(float(c_intValue)):
                     c_startValue = c_intValue
@@ -307,8 +324,12 @@ def genFctnSORN(function,*datatypes):
                     c_endValue = c_intValue
                     
             # calculate the "isopen" condition
-            c_lowerIsOpen = 0 if (np.absolute(c_startValue) >= np.absolute(c_endValue)) else 1
-            c_upperIsOpen = 0 if (np.absolute(c_startValue) <= np.absolute(c_endValue)) else 1
+            if reciprocal == 1: # Added by MB 24-06-25
+                c_lowerIsOpen = FctnTab.datatypeIN0.intervals[op0CTR].upperIsOpen
+                c_upperIsOpen = FctnTab.datatypeIN0.intervals[op0CTR].lowerIsOpen
+            else:
+                c_lowerIsOpen = 0 if (np.absolute(c_startValue) >= np.absolute(c_endValue)) else 1
+                c_upperIsOpen = 0 if (np.absolute(c_startValue) <= np.absolute(c_endValue)) else 1
                     
             # store the results
             FctnTab.resultValues.append(sornInterval(c_startValue,c_endValue,c_lowerIsOpen,c_upperIsOpen))
