@@ -1,5 +1,9 @@
 CHANGELOG sorngen
 
+25-06-26:
+Bugfix:
+1/ adapted the changes for reciprocal function (see previous entry) to not only consider 1/<op0> but also <op0>**-1 or <op0>**(-1)
+
 25-06-25:
 Bugfixes:
 1/ fixed issue with division by open/closed zero for single input reciprocal function (design_SORNHDL.py lines 281-283 and 303-314)

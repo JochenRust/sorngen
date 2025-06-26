@@ -279,7 +279,8 @@ def genFctnSORN(function,*datatypes):
     elif FctnTab.Nin == 1:
     
         # Added by MB 24-06-25: set reciprocal flag
-        symbol = re.findall(r"/",function)
+        # symbol = re.findall(r"/",function)
+        symbol = re.findall(r"/|\*\*\-|\*\*\(\-",function) ## Added by MB 26-06-25: search not only for slash "/" but also for "**-" or "**(-" defining a reciprocal with negative exponent
         reciprocal = 1 if len(symbol) >0 else 0
     
         # one input
